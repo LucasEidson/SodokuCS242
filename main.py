@@ -3,21 +3,21 @@
 import math
 import copy
 
-# import timeit
+import timeit
 
 N = 9  # N is a perfect square representing the dimensions of the board.
 
 
 def main():
     board, unsolved = get_board_input()  # INDEXED BOARD[ROW][COL]
-    # start_time = timeit.default_timer()
+    start_time = timeit.default_timer()
     propogate_constraints(board, unsolved)
     backtrack_result = backtrack(board, get_mrv_unit(board))
     if backtrack_result != "FAILURE":
         print_board(backtrack_result)
     else:
         print("No Solution.")
-    # print(timeit.default_timer() - start_time)
+    print(timeit.default_timer() - start_time)
 
 
 def backtrack(board, cur_unit):
@@ -185,7 +185,7 @@ class Unit:
         self.value = value
 
     def get_subgrid_index(self):
-        """Return the index (x, y) of the subgrid of the Variable where an NxN matrix has N sqrt(N)xsqrt(N) subgrids"""
+        """Return the index (x, y) of the subgrid of the Variable where an NxN board has N sqrt(N)xsqrt(N) subgrids"""
         subgrid_row = math.floor(self.row / (math.sqrt(N)))
         subgrid_col = math.floor(self.col / (math.sqrt(N)))
         return (subgrid_row, subgrid_col)
